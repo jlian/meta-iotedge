@@ -1,35 +1,21 @@
 #!/bin/bash -x
 
-# Fetch Yocto layers at a specified branch/template
-# Usage: ./scripts/fetch.sh <template>
+# Fetch Yocto layers at a specified branch
+# Usage: ./scripts/fetch.sh <yocto-branch>
 # Examples:
 #   ./scripts/fetch.sh scarthgap    # For Scarthgap release
 #   ./scripts/fetch.sh kirkstone    # For Kirkstone release
-#   ./scripts/fetch.sh default      # Uses scarthgap (default template)
 
 if [[ $# -lt 1 ]]; then
-    echo "Usage: $0 <template>"
-    echo "  template: Template/branch name (e.g., scarthgap, kirkstone, default)"
+    echo "Usage: $0 <yocto-branch>"
+    echo "  yocto-branch: Yocto release branch (e.g., scarthgap, kirkstone)"
     echo ""
     echo "Examples:"
     echo "  $0 scarthgap    # Fetch layers for Scarthgap release"
     echo "  $0 kirkstone    # Fetch layers for Kirkstone release"
-    echo "  $0 default      # Fetch layers for default (scarthgap)"
     exit 1
 fi
-
-# Map template name to Yocto branch name
-# The "default" template maps to scarthgap
-template=${1}
-case "${template}" in
-    default)
-        branch="scarthgap"
-        ;;
-    *)
-        branch="${template}"
-        ;;
-esac
-echo "Template '${template}' maps to Yocto branch '${branch}'"
+branch=${1}
 
 # the repos we want to check out, must setup variables below
 # NOTE: poky must remain first.

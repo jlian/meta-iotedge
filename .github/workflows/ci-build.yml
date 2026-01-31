@@ -14,7 +14,7 @@ on:
       template:
         description: "Template name passed to scripts/fetch.sh and scripts/build.sh"
         required: false
-        default: "default"
+        default: "scarthgap"
       build_targets:
         description: "Optional bitbake targets (space-separated). Leave empty for script defaults."
         required: false
@@ -72,7 +72,7 @@ jobs:
           RUN_QEMU: ${{ inputs.run_qemu || 'false' }}
         run: |
           set -euo pipefail
-          template="${{ inputs.template || 'default' }}"
+          template="${{ inputs.template || 'scarthgap' }}"
           docker run --rm \
             -e DEVCONTAINER=1 \
             -e BB_SERVER_TIMEOUT="${BB_SERVER_TIMEOUT}" \

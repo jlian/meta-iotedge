@@ -94,7 +94,10 @@ jobs:
       - name: Fix cache permissions
         run: chown -R builder:builder "${YOCTO_CACHE_DIR}"
 
+      # Timeout set to 330 minutes (5.5 hours) to allow cache save steps
+      # to complete before GitHub's 6-hour job limit cancels the workflow
       - name: Fetch + Build + (Optional) QEMU validation
+        timeout-minutes: 330
         env:
           RUN_QEMU: ${{ inputs.run_qemu || 'false' }}
         run: |

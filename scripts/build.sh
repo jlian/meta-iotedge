@@ -3,7 +3,18 @@
 # Grab the MACHINE from the environment; otherwise, set it to a sane default
 export MACHINE="${MACHINE-qemux86-64}"
 
-TEMPLATE=${1-scarthgap}
+# Map template name to actual template directory
+# The "default" template maps to "scarthgap"
+input_template=${1-scarthgap}
+case "${input_template}" in
+    default)
+        TEMPLATE="scarthgap"
+        ;;
+    *)
+        TEMPLATE="${input_template}"
+        ;;
+esac
+echo "Template '${input_template}' maps to template directory '${TEMPLATE}'"
 
 # What to build
 BUILD_TARGETS="\
